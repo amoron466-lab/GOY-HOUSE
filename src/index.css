@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+
+  /* ── Dark aurora palette ─────────────────────────────────────────
+     Near-black base, orange upper-left, blue right — aurora gradient.
+     stone-950 = section bg  (dark, gradient bleeds through)
+     stone-900 = card surface (slightly lighter dark)
+     stone-100 = headings     (near white — inverted for dark bg)
+  ─────────────────────────────────────────────────────────────── */
+  --color-stone-950: #0C0E16;   /* section bg – deep dark blue-black */
+  --color-stone-900: #14182A;   /* card / surface – dark slate */
+  --color-stone-850: #1C2035;   /* alternate surface */
+  --color-stone-800: #28304A;   /* borders & dividers */
+  --color-stone-700: #3A4460;
+  --color-stone-600: #58668A;
+  --color-stone-500: #8896B4;   /* hint text */
+  --color-stone-400: #B8C4D8;   /* secondary text – light */
+  --color-stone-300: #E0E6F2;   /* body text – near white */
+  --color-stone-200: #F0F3F8;
+  --color-stone-100: #F8FAFD;   /* headings – near white */
+
+  /* ── Brand blue (Goy House logo) ────────────────────────────── */
+  --color-gold-300: #93C5FD;
+  --color-gold-400: #3B82F6;   /* logo blue */
+  --color-gold-500: #2563EB;
+  --color-gold-600: #1D4ED8;
+
+  /* ── Warm accent ────────────────────────────────────────────── */
+  --color-beige-50:  #fdfcf8;
+  --color-beige-100: #f5f2ea;
+  --color-beige-200: #e8e2d4;
+  --color-beige-300: #d8d0be;
+}
+
+/* ── Base ──────────────────────────────────────────────────────── */
+
+body {
+  @apply font-sans text-stone-300 antialiased;
+  background-color: #05070B;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-serif font-medium;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+/* ── Layout utilities ───────────────────────────────────────────── */
+
+.section-padding {
+  @apply py-20 md:py-28;
+}
+
+.container-custom {
+  @apply max-w-7xl mx-auto px-5 sm:px-8 lg:px-10;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Section transparency — lets premium background bleed through ─
+   BackgroundEffect (position:fixed, z-index:0) sits behind everything.
+   Sections use semi-transparent dark so glows and arc show through.
+──────────────────────────────────────────────────────────────── */
+section {
+  position: relative;
+  z-index: 1;
+  background-color: rgba(5, 7, 11, 0.62) !important;
+}
+
+footer {
+  position: relative;
+  z-index: 1;
+  background-color: rgba(5, 7, 11, 0.70) !important;
+}
+
+/* ── Premium card shadow – dark mode ────────────────────────────
+   Deep black shadow + subtle light rim — glass card depth.
+──────────────────────────────────────────────────────────────── */
+.card-shadow {
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.55),
+    0 4px 20px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
+  transition: box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1), transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card-shadow:hover {
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.65),
+    0 12px 36px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.10);
+}
+
+.card-shadow-hover {
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.65),
+    0 12px 36px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.10);
+}
+
+/* ── Overline label (e.g. above section titles) ─────────────────── */
+.overline {
+  @apply text-xs font-semibold tracking-[0.18em] uppercase text-gold-400;
+}
+
+/* ── Smooth transition default ──────────────────────────────────── */
+*, *::before, *::after {
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}

@@ -1,0 +1,195 @@
+// ===============================================================
+// Data Model
+// ===============================================================
+//
+// Collection: bookings
+// Document ID: auto-generated
+// Fields (new schema):
+//   - propertyId: string (required, 1-100 chars) e.g. "goy-house"
+//   - fullName:   string (required, 2-100 chars)
+//   - phone:      string (required, 7-30 chars)
+//   - note:       string (optional, max 500 chars)
+//   - checkIn:    string (required, "YYYY-MM-DD", 10 chars)
+//   - checkOut:   string (required, "YYYY-MM-DD", 10 chars)
+//   - nights:     number (required, > 0)
+//   - totalPrice: number (required, > 0)
+//   - status:     string ('pending' | 'confirmed' | 'cancelled')
+//   - createdAt:  string (required, ISO timestamp)
+//   - updatedAt:  string (required, ISO timestamp)
+//
+// Collection: contactMessages
+// Document ID: auto-generated
+// Fields:
+//   - name:      string (required, < 100 chars)
+//   - email:     string (required, valid email)
+//   - message:   string (required, < 2000 chars)
+//   - createdAt: string (required)
+//
+// Collection: reviews
+// Document ID: auto-generated
+// Fields:
+//   - name:      string (required, < 100 chars)
+//   - role:      string (optional, < 100 chars)
+//   - text:      string (required, < 2000 chars)
+//   - rating:    number (1–5)
+//   - createdAt: string (required)
+//
+// Collection: users
+// Document ID: user uid
+// Fields:
+//   - email:     string (required, valid email)
+//   - role:      string ('admin' | 'user')
+//   - createdAt: string (required)
+//
+// ===============================================================
+//
+// DEPLOY:  firebase deploy --only firestore:rules
+//
+// ===============================================================
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── Helpers ──────────────────────────────────────────────
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && (
+        (request.auth.token.email == "amoron466@gmail.com" &&
+         request.auth.token.email_verified == true) ||
+        (exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin')
+      );
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function hasOnlyAllowedFields(fields) {
+      return request.resource.data.keys().hasOnly(fields);
+    }
+
+    function validString(field, minLen, maxLen) {
+      return request.resource.data[field] is string &&
+             request.resource.data[field].size() >= minLen &&
+             request.resource.data[field].size() <= maxLen;
+    }
+
+    function isValidEmail(email) {
+      return email is string &&
+             email.size() < 100 &&
+             email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+    }
+
+    // ── Domain validators ─────────────────────────────────────
+
+    function isValidBooking() {
+      let d = request.resource.data;
+      return hasOnlyAllowedFields([
+               'propertyId','bookingType','fullName','phone','note',
+               'checkIn','checkOut','nights','totalPrice',
+               'status','createdAt','updatedAt'
+             ]) &&
+             validString('propertyId', 1, 100) &&
+             // bookingType is optional for backwards compat but validated when present
+             (!('bookingType' in d) || d.bookingType in ['weekday','weekend','day-service','large-group']) &&
+             validString('fullName',   2, 100) &&
+             validString('phone',      7,  30) &&
+             // note is optional but must be a string if present
+             d.note is string && d.note.size() <= 500 &&
+             // dates stored as YYYY-MM-DD (exactly 10 chars)
+             validString('checkIn',  10, 10) &&
+             validString('checkOut', 10, 10) &&
+             // checkOut must be lexicographically after checkIn
+             d.checkOut > d.checkIn &&
+             // numeric fields — nights can be 0 for day-service
+             d.nights     is number && d.nights     >= 0 &&
+             d.totalPrice is number && d.totalPrice > 0 &&
+             // only 'pending' allowed on initial create
+             d.status in ['pending', 'confirmed', 'cancelled'] &&
+             validString('createdAt', 1, 50) &&
+             validString('updatedAt', 1, 50);
+    }
+
+    function isValidAdminEmail() {
+      let d = request.resource.data;
+      return d.keys().hasOnly(['email', 'addedAt', 'addedBy']) &&
+             d.email    is string && d.email.size() > 3 && d.email.size() < 100 &&
+             d.addedAt  is string && d.addedAt.size()  > 0 &&
+             d.addedBy  is string && d.addedBy.size()  > 0;
+    }
+
+    function isValidContactMessage() {
+      return hasOnlyAllowedFields(['name','email','message','createdAt']) &&
+             validString('name',    1, 100) &&
+             isValidEmail(request.resource.data.email) &&
+             validString('message', 1, 2000) &&
+             validString('createdAt', 1, 50);
+    }
+
+    function isValidReview() {
+      return hasOnlyAllowedFields(['name','role','text','rating','createdAt']) &&
+             validString('name', 1, 100) &&
+             (!('role' in request.resource.data) || validString('role', 0, 100)) &&
+             validString('text', 1, 2000) &&
+             request.resource.data.rating is number &&
+             request.resource.data.rating >= 1 &&
+             request.resource.data.rating <= 5 &&
+             validString('createdAt', 1, 50);
+    }
+
+    function isValidUser() {
+      return hasOnlyAllowedFields(['email','role','createdAt']) &&
+             isValidEmail(request.resource.data.email) &&
+             request.resource.data.role in ['admin','user'] &&
+             validString('createdAt', 1, 50);
+    }
+
+    // ── Rules ─────────────────────────────────────────────────
+
+    match /bookings/{bookingId} {
+      // Anyone can read (calendar availability display)
+      // Anyone can create — validated + must start as pending
+      // Only admins can update (confirm / cancel) or delete
+      allow read:   if true;
+      allow create: if isValidBooking() && request.resource.data.status == 'pending';
+      allow update, delete: if isAdmin();
+    }
+
+    match /contactMessages/{messageId} {
+      allow create: if isValidContactMessage();
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /reviews/{reviewId} {
+      allow read:   if true;
+      allow create: if isValidReview();
+      allow update, delete: if isAdmin();
+    }
+
+    match /users/{userId} {
+      allow read:   if isAdmin() || isOwner(userId);
+      allow create: if isOwner(userId) && isValidUser() &&
+                       (request.resource.data.role == 'user' || isAdmin());
+      // Owner can update (to promote self if pre-authorized); admin can always update role
+      allow update: if (isAdmin() || isOwner(userId)) && isValidUser() &&
+                       request.resource.data.email     == resource.data.email &&
+                       request.resource.data.createdAt == resource.data.createdAt;
+      allow delete: if isAdmin();
+    }
+
+    // Pre-authorized admin emails — added before the person first logs in
+    match /adminEmails/{emailId} {
+      // A signed-in user can check if their own email is in the list (to auto-promote on login)
+      allow read: if isAdmin() ||
+                     (isAuthenticated() && request.auth.token.email == emailId);
+      allow create: if isAdmin() && isValidAdminEmail();
+      allow delete: if isAdmin();
+    }
+  }
+}
