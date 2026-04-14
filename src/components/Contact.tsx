@@ -125,7 +125,7 @@ export const Contact = () => {
             {/* Google Maps embed */}
             <div className="h-[300px] w-full rounded-2xl overflow-hidden shadow-lg border border-stone-800">
               <iframe
-                src="https://www.google.com/maps?q=48.1486,106.9176&z=18&t=m&hl=en&output=embed"
+                src="https://www.google.com/maps?q=%D0%90%D0%9B%D0%A2%D0%90%D0%9D+%D0%A1%D0%90%D0%A0%D0%9D%D0%90%D0%99+Spa+%26+Massage+%D0%94%D0%B0%D1%80%D1%85%D0%B0%D0%BD&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
@@ -135,6 +135,16 @@ export const Contact = () => {
                 title={t.contact.iframeTitle}
               ></iframe>
             </div>
+
+            {/* Open in Maps */}
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=48.1486,106.9176"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-stone-400 hover:text-white underline underline-offset-2 transition-colors"
+            >
+              Open in Maps
+            </a>
 
             {/* Contact form */}
             <div className="bg-stone-900 p-8 rounded-2xl border border-stone-800 card-shadow">
