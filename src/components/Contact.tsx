@@ -125,7 +125,7 @@ export const Contact = () => {
             {/* Google Maps embed */}
             <div className="h-[300px] w-full rounded-2xl overflow-hidden shadow-lg border border-stone-800">
               <iframe
-                src="https://www.google.com/maps?q=48.1486,106.9176&z=15&output=embed"
+                src="https://www.google.com/maps?q=47.9082656,106.972733&z=17&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

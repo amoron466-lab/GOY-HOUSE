@@ -63,12 +63,15 @@ export const Hero = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              href="#booking"
+            <button
+              onClick={() => {
+                const el = document.getElementById('packages');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
               className="px-8 py-4 bg-gold-400 hover:bg-gold-500 text-white rounded-full font-semibold transition-all w-full sm:w-auto text-center shadow-xl shadow-black/30 hover:scale-[1.03] active:scale-100"
             >
               {t.nav.bookNow}
-            </a>
+            </button>
             <a
               href="#services"
               className="px-8 py-4 bg-transparent border border-white/60 hover:bg-white/10 text-white rounded-full font-medium transition-colors w-full sm:w-auto text-center backdrop-blur-sm"
