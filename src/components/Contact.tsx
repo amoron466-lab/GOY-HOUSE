@@ -125,7 +125,7 @@ export const Contact = () => {
             {/* Google Maps embed */}
             <div className="h-[300px] w-full rounded-2xl overflow-hidden shadow-lg border border-stone-800">
               <iframe
-                src="https://www.google.com/maps?q=%D0%90%D0%9B%D0%A2%D0%90%D0%9D+%D0%A1%D0%90%D0%A0%D0%9D%D0%90%D0%99+Spa+%26+Massage+%D0%94%D0%B0%D1%80%D1%85%D0%B0%D0%BD&output=embed"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2986.1234!2d106.9701581!3d47.9082656!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5d969192540df7ab%3A0xbfea605a2f3e2c63!2sGoy+house!5e0!3m2!1sen!2smn!4v1"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
@@ -138,7 +138,7 @@ export const Contact = () => {
 
             {/* Open in Maps */}
             <a
-              href="https://www.google.com/maps/search/?api=1&query=48.1486,106.9176"
+              href="https://www.google.com/maps/place/Goy+house/@47.9082656,106.9701581,17z/data=!3m1!4b1!4m6!3m5!1s0x5d969192540df7ab:0xbfea605a2f3e2c63!8m2!3d47.9082656!4d106.972733!16s%2Fg%2F11vpf9hsb6?hl=en-US"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-stone-400 hover:text-white underline underline-offset-2 transition-colors"
