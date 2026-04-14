@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { useLanguage } from '../i18n/LanguageContext';
-import { MapPin, Phone, Clock, Send, Instagram } from 'lucide-react';
+import { MapPin, Phone, Clock, Send } from 'lucide-react';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 import { handleFirestoreError, OperationType } from '../utils/firestoreErrorHandler';
@@ -96,22 +96,6 @@ export const Contact = () => {
               </div>
             </div>
 
-            <div className="flex items-start gap-4">
-              <div className="w-16 h-16 rounded-full bg-stone-900 border-2 border-gold-400/60 ring-2 ring-gold-400/20 flex items-center justify-center flex-shrink-0 card-shadow">
-                <Instagram className="w-9 h-9 text-gold-400" />
-              </div>
-              <div>
-                <h3 className="text-xl font-serif font-medium text-white mb-2">Instagram</h3>
-                <a
-                  href="https://www.instagram.com/goy.house?igsh=end2OXlmemlibzFm"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gold-400 text-xl font-bold hover:text-gold-300 hover:underline underline-offset-4 transition-all"
-                >
-                  @goy.house
-                </a>
-              </div>
-            </div>
 
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-full bg-stone-900 border border-stone-800 flex items-center justify-center flex-shrink-0 card-shadow">
@@ -141,7 +125,7 @@ export const Contact = () => {
             {/* Google Maps embed */}
             <div className="h-[300px] w-full rounded-2xl overflow-hidden shadow-lg border border-stone-800">
               <iframe
-                src="https://maps.app.goo.gl/aLBedHFpeHGoUuJY6"
+                src="https://www.google.com/maps?q=48.1486,106.9176&z=15&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
