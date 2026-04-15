@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { useLanguage } from '../i18n/LanguageContext';
-import { Mic2, Disc3, Camera, BedDouble, Waves, ChefHat, Car, Users } from 'lucide-react';
+import { Mic2, Disc3, Camera, BedDouble, Waves, ChefHat, Car, Users, UtensilsCrossed } from 'lucide-react';
 
 export const Services = () => {
   const { t } = useLanguage();
@@ -48,6 +48,13 @@ export const Services = () => {
       desc: t.services.foamDesc,
       icon: <ChefHat className="w-8 h-8 text-gold-400" />,
       image: 'https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=800&auto=format&fit=crop',
+    },
+    {
+      id: 'kitchen',
+      title: t.services.kitchen,
+      desc: t.services.kitchenDesc,
+      icon: <UtensilsCrossed className="w-8 h-8 text-gold-400" />,
+      image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=800&auto=format&fit=crop',
     },
     {
       id: 'parking',
