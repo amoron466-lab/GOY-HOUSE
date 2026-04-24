@@ -17,7 +17,7 @@ export const Hero = () => {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2070&auto=format&fit=crop"
+          src="/outside.jpg"
           alt="Goy House VIP"
           className="w-full h-full object-cover"
           referrerPolicy="no-referrer"

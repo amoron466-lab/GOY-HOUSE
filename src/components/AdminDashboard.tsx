@@ -241,18 +241,16 @@ export const AdminDashboard = () => {
   };
 
   const removeAdminEmail = async (email: string) => {
-    if (email === 'amoron466@gmail.com') return; // superadmin protected
-    if (email === (user?.email ?? '').toLowerCase()) {
-      alert(t.selfRemoveErr);
-      return;
-    }
     if (!window.confirm(t.revokeConfirm.replace('{email}', email))) return;
+    const isSelfRemoval = email === (user?.email ?? '').toLowerCase();
     try {
       await deleteDoc(doc(db, 'adminEmails', email));
-      // Demote in users collection if they have signed in
       const existing = await getDocs(query(collection(db, 'users'), where('email', '==', email)));
       for (const snap of existing.docs) {
         await updateDoc(snap.ref, { role: 'user' });
+      }
+      if (isSelfRemoval) {
+        await signOut(auth);
       }
     } catch (error) {
       handleFirestoreError(error, OperationType.DELETE, 'adminEmails');
@@ -650,18 +648,13 @@ export const AdminDashboard = () => {
                             )}
                           </td>
                           <td className="p-4 text-right">
-                            {!isSelf && (
-                              <button
-                                onClick={() => removeAdminEmail(entry.email)}
-                                className="p-2 text-red-400 hover:bg-red-900/20 rounded-lg transition-colors"
-                                title={t.removeAdminTitle}
-                              >
-                                <Trash2 className="w-4 h-4" />
-                              </button>
-                            )}
-                            {isSelf && (
-                              <span className="text-xs text-stone-600 px-2">{t.selfLabel}</span>
-                            )}
+                            <button
+                              onClick={() => removeAdminEmail(entry.email)}
+                              className="p-2 text-red-400 hover:bg-red-900/20 rounded-lg transition-colors"
+                              title={t.removeAdminTitle}
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
                           </td>
                         </tr>
                       );

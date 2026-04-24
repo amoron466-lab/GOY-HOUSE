@@ -7,11 +7,12 @@ export const Gallery = () => {
 
   const images = [
     { src: '/outside.jpg',  alt: t.gallery.alt1 },
-    { src: '/karaoke.jpg',  alt: t.gallery.alt2 },
-    { src: '/bedroom.jpg',  alt: t.gallery.alt3 },
-    { src: '/billiard.jpg', alt: t.gallery.alt4 },
+    { src: '/event-hall.jpg',  alt: t.gallery.alt2 },
+    { src: '/karaoke-new.jpg', alt: t.gallery.alt6 },
+    { src: '/bedroom-new.jpg',  alt: t.gallery.alt3 },
+    { src: '/billiard-new.jpg', alt: t.gallery.alt4 },
     {
-      src: 'https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=800&auto=format&fit=crop',
+      src: '/buffet-new.jpg',
       alt: t.gallery.alt5,
     },
   ];

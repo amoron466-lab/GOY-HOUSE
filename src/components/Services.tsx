@@ -112,20 +112,9 @@ export const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.07, duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-              className="bg-stone-900 rounded-2xl p-8 border border-stone-800 hover:border-gold-400/25 card-shadow hover:-translate-y-1 transition-all duration-300 flex flex-col h-full overflow-hidden relative"
+              className="bg-stone-900 rounded-2xl p-8 border border-stone-800 hover:border-gold-400/25 card-shadow hover:-translate-y-1 transition-all duration-300 flex flex-col h-full"
             >
-              {service.image && (
-                <div className="absolute inset-0 z-0 opacity-10">
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="w-full h-full object-cover"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-stone-900 via-stone-900/60 to-transparent"></div>
-                </div>
-              )}
-              <div className="relative z-10 flex flex-col h-full">
+              <div className="flex flex-col h-full">
                 <div className="mb-6 bg-stone-800 w-16 h-16 rounded-full flex items-center justify-center shadow-sm ring-1 ring-gold-400/20">
                   {service.icon}
                 </div>
