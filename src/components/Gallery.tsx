@@ -6,15 +6,25 @@ export const Gallery = () => {
   const { t } = useLanguage();
 
   const images = [
-    { src: '/outside.jpg',  alt: t.gallery.alt1 },
-    { src: '/event-hall.jpg',  alt: t.gallery.alt2 },
-    { src: '/karaoke-new.jpg', alt: t.gallery.alt6 },
-    { src: '/bedroom-new.jpg',  alt: t.gallery.alt3 },
-    { src: '/billiard-new.jpg', alt: t.gallery.alt4 },
-    {
-      src: '/buffet-new.jpg',
-      alt: t.gallery.alt5,
-    },
+    { src: '/outside.jpg',              alt: 'VIP HOUSE-ийн гадна тал' },       // #1
+    { src: '/event-hall.jpg',           alt: 'Арга хэмжээний танхим' },         // #2
+    { src: '/gallery/goy-house-04.jpg', alt: 'Арга хэмжээний танхим' },         // #10
+    { src: '/gallery/goy-house-12.jpg', alt: 'Арга хэмжээний танхим' },         // #17
+    { src: '/karaoke-new.jpg',          alt: 'Каракое' },                        // #3
+    { src: '/gallery/goy-house-05.jpg', alt: 'Каракое' },                        // #11
+    { src: '/buffet-new.jpg',           alt: 'Буфет хоол' },                    // #6
+    { src: '/gallery/goy-house-02.jpg', alt: 'Гал тогоо' },                     // #8
+    { src: '/gallery/goy-house-03.jpg', alt: 'Гал тогоо' },                     // #9
+    { src: '/gallery/goy-house-01.jpg', alt: 'Зургийн талбай' },                // #7
+    { src: '/billiard-new.jpg',         alt: 'Биллиард' },                      // #5
+    { src: '/gallery/goy-house-07.jpg', alt: 'Биллиард' },                      // #12
+    { src: '/gallery/goy-house-08.jpg', alt: 'Биллиард' },                      // #13
+    { src: '/bedroom-new.jpg',          alt: 'Унтлагын өрөө #1' },              // #4
+    { src: '/gallery/goy-house-09.jpg', alt: 'Унтлагын өрөө #2' },              // #14
+    { src: '/gallery/goy-house-10.jpg', alt: 'Унтлагын өрөө #3' },              // #15
+    { src: '/gallery/goy-house-13.jpg', alt: 'Унтлагын өрөө #4' },              // #18
+    { src: '/gallery/goy-house-14.jpg', alt: 'Ширээний хөл бөмбөг' },           // #19
+    { src: '/gallery/goy-house-11.jpg', alt: 'Амрах талбай' },                  // #16
   ];
 
   return (
@@ -49,7 +59,7 @@ export const Gallery = () => {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
           {images.map((img, index) => (
             <motion.div
               key={index}
