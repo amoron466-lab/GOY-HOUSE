@@ -1,0 +1,186 @@
+{
+  "entities": {
+    "Booking": {
+      "title": "Booking",
+      "description": "A customer's appointment booking.",
+      "type": "object",
+      "properties": {
+        "service": {
+          "type": "string",
+          "description": "The requested service."
+        },
+        "date": {
+          "type": "string",
+          "description": "The requested date."
+        },
+        "time": {
+          "type": "string",
+          "description": "The requested time."
+        },
+        "name": {
+          "type": "string",
+          "description": "Customer's name."
+        },
+        "phone": {
+          "type": "string",
+          "description": "Customer's phone number."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "confirmed", "cancelled"],
+          "description": "Booking status."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the booking was created."
+        }
+      },
+      "required": ["service", "date", "time", "name", "phone", "status", "createdAt"]
+    },
+    "ContactMessage": {
+      "title": "Contact Message",
+      "description": "A message sent through the contact form.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Sender's name."
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Sender's email address."
+        },
+        "message": {
+          "type": "string",
+          "description": "The message content."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the message was sent."
+        }
+      },
+      "required": ["name", "email", "message", "createdAt"]
+    },
+    "GiftCardOrder": {
+      "title": "Gift Card Order",
+      "description": "An order for a gift card.",
+      "type": "object",
+      "properties": {
+        "buyerName": {
+          "type": "string",
+          "description": "Name of the buyer."
+        },
+        "buyerPhone": {
+          "type": "string",
+          "description": "Phone number of the buyer."
+        },
+        "recipientName": {
+          "type": "string",
+          "description": "Name of the recipient."
+        },
+        "amount": {
+          "type": "number",
+          "description": "The value of the gift card."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "paid", "fulfilled"],
+          "description": "Order status."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the order was placed."
+        }
+      },
+      "required": ["buyerName", "buyerPhone", "recipientName", "amount", "status", "createdAt"]
+    },
+    "User": {
+      "title": "User",
+      "description": "A user of the admin dashboard.",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "The user's email address."
+        },
+        "role": {
+          "type": "string",
+          "enum": ["admin", "user"],
+          "description": "The user's role."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the user account was created."
+        }
+      },
+      "required": ["email", "role", "createdAt"]
+    },
+    "Review": {
+      "title": "Review",
+      "description": "A customer review.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Customer's name."
+        },
+        "role": {
+          "type": "string",
+          "description": "Customer's role or title."
+        },
+        "text": {
+          "type": "string",
+          "description": "The review content."
+        },
+        "rating": {
+          "type": "number",
+          "description": "Rating from 1 to 5."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the review was created."
+        }
+      },
+      "required": ["name", "text", "rating", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/bookings/{bookingId}": {
+      "schema": {
+        "$ref": "#/entities/Booking"
+      },
+      "description": "Stores all customer bookings."
+    },
+    "/contactMessages/{messageId}": {
+      "schema": {
+        "$ref": "#/entities/ContactMessage"
+      },
+      "description": "Stores all contact form submissions."
+    },
+    "/giftCardOrders/{orderId}": {
+      "schema": {
+        "$ref": "#/entities/GiftCardOrder"
+      },
+      "description": "Stores all gift card orders."
+    },
+    "/users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/User"
+      },
+      "description": "Stores users and their roles for the admin dashboard."
+    },
+    "/reviews/{reviewId}": {
+      "schema": {
+        "$ref": "#/entities/Review"
+      },
+      "description": "Stores customer reviews."
+    }
+  }
+}
