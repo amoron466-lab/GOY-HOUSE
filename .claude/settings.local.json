@@ -1,0 +1,39 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(npx tsc:*)",
+      "Bash(node_modules/.bin/tsc --noEmit)",
+      "Bash(npm install:*)",
+      "Bash(node --input-type=module --eval ':*)",
+      "Bash(firebase deploy:*)",
+      "Bash(firebase:*)",
+      "Bash(npx vercel:*)",
+      "Bash(vercel whoami:*)",
+      "Bash(vercel deploy:*)",
+      "Bash(vercel link:*)",
+      "Bash(vercel projects:*)",
+      "Bash(vercel project:*)",
+      "Bash(cp \"D:/FOR EDIT/440431026_951214540036836_537628173759779185_n.jpg\" \"D:/EDIT/ALTAN-SARNAI/ALTAN-SARNAI-main/src/assets/logo.png\")",
+      "Bash(cp \"D:/FOR EDIT/440431026_951214540036836_537628173759779185_n.jpg\" \"D:/EDIT/ALTAN-SARNAI/ALTAN-SARNAI-main/public/logo.png\")",
+      "Bash(vercel --prod --yes)",
+      "Bash(cp \"D:/FOR EDIT/666010483_1440471203924537_7157189575256736307_n.jpg\" \"D:/EDIT/ALTAN-SARNAI/ALTAN-SARNAI-main/public/jacuzzi.jpg\")",
+      "Bash(cp \"D:/FOR EDIT/671276939_2218879208646063_1669723923071775392_n.jpg\" \"D:/EDIT/ALTAN-SARNAI/ALTAN-SARNAI-main/public/outside.jpg\")",
+      "Bash(cp \"D:/FOR EDIT/666403318_959443323400373_6196242570970211548_n.jpg\" \"D:/EDIT/ALTAN-SARNAI/ALTAN-SARNAI-main/public/billiard.jpg\")",
+      "Bash(cp \"D:/FOR EDIT/665961144_932773949572164_2696501804985009580_n.jpg\" \"D:/EDIT/ALTAN-SARNAI/ALTAN-SARNAI-main/public/karaoke.jpg\")",
+      "Bash(cp \"D:/FOR EDIT/671242745_1931676970799458_5913249726037860688_n.jpg\" \"D:/EDIT/ALTAN-SARNAI/ALTAN-SARNAI-main/public/bedroom.jpg\")",
+      "Bash(vercel --version)",
+      "Bash(vercel --prod --scope senju1)",
+      "Bash(xargs cat:*)",
+      "Bash(cmd:*)",
+      "Bash(powershell:*)",
+      "WebFetch(domain:maps.app.goo.gl)",
+      "Bash(git *)",
+      "Bash(cp \"all pictures/1.jpg\"  \"ALTAN-SARNAI-main/public/gallery/goy-house-01.jpg\")",
+      "Bash(cp \"all pictures/2.jpg\"  \"ALTAN-SARNAI-main/public/gallery/goy-house-02.jpg\")",
+      "Bash(cp \"all pictures/3.jpg\"  \"ALTAN-SARNAI-main/public/gallery/goy-house-03.jpg\")",
+      "Bash(cp \"all pictures/4.jpg\"  \"ALTAN-SARNAI-main/public/gallery/goy-house-04.jpg\")",
+      "Bash(cp \"all pictures/5.jpg\"  \"ALTAN-SARNAI-main/public/gallery/goy-house-05.jpg\")"
+    ]
+  }
+}
